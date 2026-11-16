@@ -7,13 +7,18 @@
 
 /**
  * Get all projects
+ *
+ * PHP 7.4 has no union return types, so the object|false contract that
+ * db_query() actually has is declared here rather than in the signature.
+ *
+ * @return object|false mysqli result set, or false on query failure
  */
-function get_pm_projects(string $search = '', string $status = ''): object|false
+function get_pm_projects(string $search = '', string $status = '')
 {
     $sql = "SELECT p.*,
             e.first_name as manager_first_name, e.last_name as manager_last_name
-            FROM " . TB_PREF . "fa_pm_projects p
-            LEFT JOIN employees e ON p.project_manager = e.employee_id
+            FROM " . TB_PREF . "ksf_projectmanagement_projects p
+            LEFT JOIN " . TB_PREF . "ksf_projectmanagement_employees e ON p.project_manager = e.employee_id
             WHERE 1=1";
 
     $params = [];
@@ -37,7 +42,7 @@ function get_pm_projects(string $search = '', string $status = ''): object|false
  */
 function get_pm_project(string $projectId): ?array
 {
-    $sql = "SELECT * FROM " . TB_PREF . "fa_pm_projects WHERE project_id = " . db_escape($projectId);
+    $sql = "SELECT * FROM " . TB_PREF . "ksf_projectmanagement_projects WHERE project_id = " . db_escape($projectId);
     $result = db_query($sql);
 
     if ($result === false) {
@@ -52,7 +57,7 @@ function get_pm_project(string $projectId): ?array
  */
 function get_pm_project_count(string $status = ''): int
 {
-    $sql = "SELECT COUNT(*) as cnt FROM " . TB_PREF . "fa_pm_projects";
+    $sql = "SELECT COUNT(*) as cnt FROM " . TB_PREF . "ksf_projectmanagement_projects";
 
     if ($status !== '') {
         $sql .= " WHERE status = " . db_escape($status);
@@ -66,12 +71,17 @@ function get_pm_project_count(string $status = ''): int
 
 /**
  * Get all tasks
+ *
+ * PHP 7.4 has no union return types, so the object|false contract that
+ * db_query() actually has is declared here rather than in the signature.
+ *
+ * @return object|false mysqli result set, or false on query failure
  */
-function get_pm_tasks(string $projectId = ''): object|false
+function get_pm_tasks(string $projectId = '')
 {
     $sql = "SELECT t.*, p.name as project_name
-            FROM " . TB_PREF . "fa_pm_tasks t
-            INNER JOIN " . TB_PREF . "fa_pm_projects p ON t.project_id = p.project_id
+            FROM " . TB_PREF . "ksf_projectmanagement_tasks t
+            INNER JOIN " . TB_PREF . "ksf_projectmanagement_projects p ON t.project_id = p.project_id
             WHERE 1=1";
 
     if ($projectId !== '') {
@@ -88,7 +98,7 @@ function get_pm_tasks(string $projectId = ''): object|false
  */
 function get_pm_task(string $taskId): ?array
 {
-    $sql = "SELECT * FROM " . TB_PREF . "fa_pm_tasks WHERE task_id = " . db_escape($taskId);
+    $sql = "SELECT * FROM " . TB_PREF . "ksf_projectmanagement_tasks WHERE task_id = " . db_escape($taskId);
     $result = db_query($sql);
 
     if ($result === false) {
@@ -103,7 +113,7 @@ function get_pm_task(string $taskId): ?array
  */
 function get_pm_task_count(string $status = ''): int
 {
-    $sql = "SELECT COUNT(*) as cnt FROM " . TB_PREF . "fa_pm_tasks";
+    $sql = "SELECT COUNT(*) as cnt FROM " . TB_PREF . "ksf_projectmanagement_tasks";
 
     if ($status !== '') {
         $sql .= " WHERE status = " . db_escape($status);
@@ -120,7 +130,7 @@ function get_pm_task_count(string $status = ''): int
  */
 function get_pm_overdue_task_count(): int
 {
-    $sql = "SELECT COUNT(*) as cnt FROM " . TB_PREF . "fa_pm_tasks
+    $sql = "SELECT COUNT(*) as cnt FROM " . TB_PREF . "ksf_projectmanagement_tasks
             WHERE end_date < CURDATE()
             AND status NOT IN ('Completed', 'Cancelled')";
 
@@ -135,7 +145,7 @@ function get_pm_overdue_task_count(): int
  */
 function insert_pm_project(array $data): string
 {
-    $sql = "INSERT INTO " . TB_PREF . "fa_pm_projects
+    $sql = "INSERT INTO " . TB_PREF . "ksf_projectmanagement_projects
             (project_id, name, description, start_date, end_date, budget,
              customer_id, project_manager, priority, status)
             VALUES (
@@ -161,7 +171,7 @@ function insert_pm_project(array $data): string
  */
 function update_pm_project(string $projectId, array $data): bool
 {
-    $sql = "UPDATE " . TB_PREF . "fa_pm_projects SET
+    $sql = "UPDATE " . TB_PREF . "ksf_projectmanagement_projects SET
             name = " . db_escape($data['name']) . ",
             description = " . db_escape($data['description'] ?? '') . ",
             start_date = " . db_escape($data['start_date']) . ",
@@ -181,7 +191,7 @@ function update_pm_project(string $projectId, array $data): bool
  */
 function delete_pm_project(string $projectId): bool
 {
-    $sql = "DELETE FROM " . TB_PREF . "fa_pm_projects WHERE project_id = " . db_escape($projectId);
+    $sql = "DELETE FROM " . TB_PREF . "ksf_projectmanagement_projects WHERE project_id = " . db_escape($projectId);
     return db_query($sql, "Could not delete project");
 }
 
@@ -190,7 +200,7 @@ function delete_pm_project(string $projectId): bool
  */
 function insert_pm_task(array $data): string
 {
-    $sql = "INSERT INTO " . TB_PREF . "fa_pm_tasks
+    $sql = "INSERT INTO " . TB_PREF . "ksf_projectmanagement_tasks
             (task_id, project_id, parent_task_id, name, description,
              assigned_to, start_date, end_date, estimated_hours, actual_hours,
              progress, priority, status)
@@ -220,7 +230,7 @@ function insert_pm_task(array $data): string
  */
 function update_pm_task(string $taskId, array $data): bool
 {
-    $sql = "UPDATE " . TB_PREF . "fa_pm_tasks SET
+    $sql = "UPDATE " . TB_PREF . "ksf_projectmanagement_tasks SET
             name = " . db_escape($data['name']) . ",
             description = " . db_escape($data['description'] ?? '') . ",
             assigned_to = " . db_escape($data['assigned_to'] ?? '') . ",
@@ -242,8 +252,8 @@ function update_pm_task(string $taskId, array $data): bool
 function get_pm_project_team(string $projectId): array
 {
     $sql = "SELECT pa.*, e.employee_id, e.first_name, e.last_name, e.email, e.job_title
-            FROM " . TB_PREF . "fa_pm_assignments pa
-            INNER JOIN " . TB_PREF . "employees e ON pa.employee_id = e.employee_id
+            FROM " . TB_PREF . "ksf_projectmanagement_assignments pa
+            INNER JOIN " . TB_PREF . "ksf_projectmanagement_employees e ON pa.employee_id = e.employee_id
             WHERE pa.project_id = " . db_escape($projectId) . "
             AND (pa.end_date IS NULL OR pa.end_date >= CURDATE())
             ORDER BY e.last_name, e.first_name";
@@ -263,7 +273,7 @@ function get_pm_project_team(string $projectId): array
  */
 function assign_employee_to_project(array $data): bool
 {
-    $sql = "INSERT INTO " . TB_PREF . "fa_pm_assignments
+    $sql = "INSERT INTO " . TB_PREF . "ksf_projectmanagement_assignments
             (project_id, employee_id, role, start_date, end_date, allocation_percentage)
             VALUES (
                 " . db_escape($data['project_id']) . ",
@@ -282,7 +292,7 @@ function assign_employee_to_project(array $data): bool
  */
 function remove_employee_from_project(string $projectId, string $employeeId): bool
 {
-    $sql = "DELETE FROM " . TB_PREF . "fa_pm_assignments
+    $sql = "DELETE FROM " . TB_PREF . "ksf_projectmanagement_assignments
             WHERE project_id = " . db_escape($projectId) . "
             AND employee_id = " . db_escape($employeeId);
 
@@ -294,7 +304,7 @@ function remove_employee_from_project(string $projectId, string $employeeId): bo
  */
 function get_pm_recent_activities(int $limit = 10): array
 {
-    $sql = "SELECT * FROM " . TB_PREF . "fa_pm_activity_log
+    $sql = "SELECT * FROM " . TB_PREF . "ksf_projectmanagement_activity_log
             ORDER BY created_at DESC
             LIMIT " . (int) $limit;
 

@@ -10,7 +10,12 @@
  */
 
 $path_to_root = "../..";
+
+// Security area is declared by hooks_ksf_FA_ProjectManagement::install_access();
+// FA page() enforces it via check_page_security() at render time.
+$page_security = 'SA_ksf_FA_ProjectManagementVIEW';
 include_once($path_to_root . "/includes/session.inc");
+add_access_extensions();
 include_once($path_to_root . "/includes/ui.inc");
 include_once($path_to_root . "/includes/db.inc");
 
@@ -20,11 +25,6 @@ include_once(__DIR__ . "/includes/pm_ui.inc");
 $section = isset($_GET['section']) ? $_GET['section'] : 'dashboard';
 $action = isset($_GET['action']) ? $_GET['action'] : 'list';
 
-if (!$session->check_access('PM_VIEW_PROJECT')) {
-    display_error("Access denied");
-    exit;
-}
-
 function fa_pm_route($section, $action)
 {
     switch ($section) {
@@ -32,10 +32,10 @@ function fa_pm_route($section, $action)
             fa_pm_dashboard($action);
             break;
         case 'projects':
-            fa_pm_projects($action);
+            ksf_fa_pm_projects($action);
             break;
         case 'tasks':
-            fa_pm_tasks($action);
+            ksf_fa_pm_tasks($action);
             break;
         case 'team':
             fa_pm_team($action);
@@ -76,7 +76,7 @@ function fa_pm_dashboard($action)
     page_end();
 }
 
-function fa_pm_projects($action)
+function ksf_fa_pm_projects($action)
 {
     switch ($action) {
         case 'list':
@@ -340,7 +340,7 @@ function fa_pm_delete_project()
     fa_pm_list_projects();
 }
 
-function fa_pm_tasks($action)
+function ksf_fa_pm_tasks($action)
 {
     switch ($action) {
         case 'list':

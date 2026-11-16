@@ -43,15 +43,16 @@
 
 | Package | Dir | Namespace | Purpose |
 |---------|-----|-----------|---------|
-| `ksfraser/exceptions` | `Exceptions/` | `Ksfraser\Exceptions\` | Centralized exception library (Domain, Utility, CRM, Calendar, PM). 24 dependents. |
-| `ksfraser/famock` | `famock/` | `Ksfraser\FAMock\` | FA function mocks for unit testing outside live FA. 20 dependents. |
+| `ksfraser/ksf-architecture-docs` | `ksf_Architecture_Docs/` | — | Cross-module architecture decisions, BABOK requirements and design records (schema codegen, ACL, workflow engine, shared front controller, per-module adoption reports). Documentation repo - hardlinks the shared `AGENTS*.md` / `MODULE_DIRECTORY.md` / `PACKAGIST.md` / `APP_TAB_ARCHITECTURE.md` set rather than copying them. |
+| `ksfraser/exceptions` | `Exceptions/` | `ksfraser\Exceptions\` | Centralized exception library (Domain, Utility, CRM, Calendar, PM). 24 dependents. |
+| `ksfraser/famock` | `famock/` | `ksfraser\FAMock\` | FA function mocks for unit testing outside live FA. 20 dependents. |
 | `ksfraser/ksf-fa-common` | `ksf_FA_Common/` | `ksfraser\FrontAccounting\Common\` | Shared FA platform as a **pure Composer/Packagist package** (v1.0.10, no FA extension — hooks.php deleted). ContactTypeRegistry, SchemaInstaller, Traits (WorkflowHooks, CrudOperations, FlashMessage, CalendarRegistration), plus `FileStorageService` and a `BaseHooks` base class (referenced by ksf_FA_Attachments), `ItemEvents\ItemEventPublisher`, `ExtensionRegistry`, `JobQueue`, `PreferenceRepository`. Loaded lazily via Composer autoload; **not** activated as an extension. |
-| `ksfraser/traits` | `Traits/` | `Ksfraser\Traits\` | Reusable traits: CrudEventEmitter, EntityState, EventEmitter, HookQueryProvider, InlineTabRenderer, Validatable, Timestamp, PSR-3 FileLogger. 13 dependents. |
-| `ksfraser/ksf-modules-dao` | `ksf_ModulesDAO/` | `Ksfraser\ModulesDAO\` | Cross-platform DAO: RecordStoreInterface, DbAdapterInterface, KeyValueStoreInterface. Adapters for FA, PDO, WordPress, SuiteCRM. 13 dependents. |
-| `ksfraser/database` | `Database/` | `Ksfraser\Database\` | Database helper utilities (DbManager static wrapper). 12 dependents. |
-| `ksfraser/ksf_modules_common` | `ksf_modules_common/` | `Ksfraser\ModulesCommon\` | Calculation framework: engine contract, context/result, parameter definitions, validation rules. 10 dependents. |
+| `ksfraser/traits` | `Traits/` | `ksfraser\Traits\` | Reusable traits: CrudEventEmitter, EntityState, EventEmitter, HookQueryProvider, InlineTabRenderer, Validatable, Timestamp, PSR-3 FileLogger. 13 dependents. |
+| `ksfraser/ksf-modules-dao` | `ksf_ModulesDAO/` | `ksfraser\ModulesDAO\` | Cross-platform DAO: RecordStoreInterface, DbAdapterInterface, KeyValueStoreInterface. Adapters for FA, PDO, WordPress, SuiteCRM. 13 dependents. |
+| `ksfraser/database` | `Database/` | `ksfraser\Database\` | Database helper utilities (DbManager static wrapper). 12 dependents. |
+| `ksfraser/ksf_modules_common` | `ksf_modules_common/` | `ksfraser\ModulesCommon\` | Calculation framework: engine contract, context/result, parameter definitions, validation rules. 10 dependents. |
 | `ksfraser/ksf-common-db` | `ksf_common_db/` | `ksfraser\CommonDb\` | Transport-agnostic data dictionary + query builder. `DbConnectionInterface`, `FaDbAdapter` (native `db_*`, FA runtime), `PdoDbAdapter` (standalone), `TableDefinition`, `QueryBuilder`. Consumed by RBAC. |
-| `ksfraser/html` | `ksfraser/html/` | `Ksfraser\HTML\` | HTML generation library: Buttons, Cells, Forms, Tables, CSS, Ajax, Themes. |
+| `ksfraser/html` | `ksfraser/html/` | `ksfraser\HTML\` | HTML generation library: Buttons, Cells, Forms, Tables, CSS, Ajax, Themes. |
 
 ---
 
@@ -59,16 +60,16 @@
 
 | Package | Dir | Namespace | Purpose |
 |---------|-----|-----------|---------|
-| `ksfraser/validation` | `Validation/` | `Ksfraser\Validation\` | Validation helpers and traits |
-| `ksfraser/staging-dto` | `ksf_staging_dto/` | `Ksfraser\StagingDto\` | DTOs for import staging (Woo, Square, Bank Import) |
-| `ksfraser/rbac` | `ksf_RBAC/` | `Ksfraser\RBAC\` | Framework-agnostic RBAC: teams, SQL-JOIN enforcement, audit |
+| `ksfraser/validation` | `Validation/` | `ksfraser\Validation\` | Validation helpers and traits |
+| `ksfraser/staging-dto` | `ksf_staging_dto/` | `ksfraser\StagingDto\` | DTOs for import staging (Woo, Square, Bank Import) |
+| `ksfraser/rbac` | `ksf_RBAC/` | `ksfraser\RBAC\` | Framework-agnostic RBAC: teams, SQL-JOIN enforcement, audit |
 | `ksfraser/ksf-llm` | `ksf_LLM/` | `KsfCommon\LLM\` | Multi-provider LLM connector (PHP 8.1+) |
-| `ksfraser/ksf_gpg` | `ksf_GPG/` | `Ksfraser\GPG\` | GPG key management, signing, encryption |
+| `ksfraser/ksf_gpg` | `ksf_GPG/` | `ksfraser\GPG\` | GPG key management, signing, encryption |
 | `ksfraser/fa-classes` | `ksf_FA_Classes/` | `FrontAccounting\` | FA table classes and data-access helpers |
-| `ksfraser/ksf-estate` | `ksf_estate/` | `Ksfraser\Estate\` | Estate planning calculations |
-| `ksfraser/ksf_insurance` | `ksf_insurance/` | `Ksfraser\Insurance\` | Insurance calculations |
-| `ksfraser/fa-hooks` | *(vendor)* | `Ksfraser\FA_Hooks\` | Lightweight FA hook system |
-| `ksfraser/contact-dto` | *(vendor)* | `Ksfraser\Contact\` | Shared Contact DTO |
+| `ksfraser/ksf-estate` | `ksf_estate/` | `ksfraser\Estate\` | Estate planning calculations |
+| `ksfraser/ksf_insurance` | `ksf_insurance/` | `ksfraser\Insurance\` | Insurance calculations |
+| `ksfraser/fa-hooks` | *(vendor)* | `ksfraser\FA_Hooks\` | Lightweight FA hook system |
+| `ksfraser/contact-dto` | *(vendor)* | `ksfraser\Contact\` | Shared Contact DTO |
 
 ---
 
@@ -98,7 +99,7 @@ HRM (`ksf_FA_HRM`) is an orchestrator. These sub-modules answer hooks:
 
 | Module | Version | Purpose | Tables |
 |--------|---------|---------|--------|
-| **ksf_FA_Common** | — | Platform foundation library (pure Composer package, not activated). ContactTypeRegistry, SchemaInstaller. Creates shared tables on demand: `0_ksf_contact_types`, `0_fa_job_queue`, `0_ksf_item_event_watermark`, `0_ksf_item_sync_state`, `0_ksf_notifications`. | on-demand shared tables |
+| **ksf_FA_Common** | — | Platform foundation library (pure Composer package, not activated). ContactTypeRegistry, SchemaInstaller. Creates shared tables on demand: `0_ksf_contact_types`, `0_ksf_common_job_queue`, `0_ksf_modules`, `0_ksf_item_event_watermark`, `0_ksf_item_sync_state`, `0_ksf_notifications`. | on-demand shared tables |
 | **ksf_FA_Classes** | — | Base class library (no hooks.php) | None |
 | **ksf_FA_RBAC** | 1.0.0 | Role-based access control. Bridges `ksfraser/rbac` to FA. | `0_rbac_teams`, `0_rbac_team_members`, `0_rbac_record_access`, `0_rbac_audit_log` |
 | **ksf_FA_GPG** | 2.4.19-0 | GPG signing/encryption. Key management UI. | `0_ksf_gpg_keys`, `0_ksf_gpg_operations`, `0_ksf_gpg_files`, `0_ksf_gpg_settings`, `0_ksf_gpg_team_keys` |
@@ -106,13 +107,14 @@ HRM (`ksf_FA_HRM`) is an orchestrator. These sub-modules answer hooks:
 | **ksf_FA_Logging** | — | Structured JSON-lines logging. Per-module log levels. | `0_ksf_log_levels` |
 | **ksf_FA_API** | 1.0.0 | REST API endpoints | `0_ksf_api_logs` |
 | **ksf_FA_DataIntegrity** | 2.4.4 | Purchase/sales chain auditing. Orphan/counter drift detection. | `0_ksf_integrity_log` |
+| **ksf_FA_RelatedTo** | 2.4.3-0 | Generic cross-module "record A is related to record B" associations. Owns `0_ksf_RelatedTo` table. Answers RELATE_RECORDS / RELATED_TO / RELATED_MODULES / RELATED_TO_FIELDS hooks. Provides resolved DTOs (`ContactResolvedDto`, `InvoiceResolvedDto`, …) for display. | `0_ksf_RelatedTo` |
 
 ### CRM / Sales
 
 | Module | Version | Purpose | Tables |
 |--------|---------|---------|--------|
-| **ksf_FA_CRM** | 1.0.0 | Full CRM suite. Customers, contacts, leads, opportunities, communications, quotes, territories. | `0_fa_crm_*` (16 tables) |
-| **ksf_FA_Calendar** | 2.5.0 | Calendar/events/meetings. CRM/HRM integration. Has own app tab. | `0_fa_cal_entries`, `0_fa_cal_invitees`, `0_fa_cal_sources` |
+| **ksf_FA_CRM** | 1.0.0 | Full CRM suite. Customers, contacts, leads, opportunities, communications, quotes, territories. | `0_ksf_crm_*` (16 tables) |
+| **ksf_FA_Calendar** | 2.5.0 | Calendar/events/meetings. CRM/HRM integration. Has own app tab. | `0_ksf_calendar_entries`, `0_ksf_calendar_invitees`, `0_ksf_calendar_sources` |
 | **ksf_FA_CampaignBuilder** | 1.0.0 | Marketing campaign management | `fa_campaigns`, `fa_campaign_nodes` |
 | **ksf_FA_EmailManager** | 1.0.0 | Email campaigns, templates, automation | Schema placeholder |
 | **ksf_FA_Loyalty** | 1.0.0 | Customer loyalty points/tiers. Depends on `ksf_FA_CRM` (customer contacts). | Schema placeholder |
@@ -168,8 +170,8 @@ HRM (`ksf_FA_HRM`) is an orchestrator. These sub-modules answer hooks:
 | Module | Version | Purpose | Tables |
 |--------|---------|---------|--------|
 | **ksf_FA_Documents** | 1.0.0 | Document versioning, linking, GPG integration | `fa_documents*` (5 tables) |
-| **ksf_FA_Attachments** | — | Cross-module file attachments | `0_fa_attachments`, `0_fa_attachment_audit` |
-| **ksf_FA_Notes** | 1.0.0 | Notes/comments on transactions/contacts | `0_fa_crm_notes`, `0_fa_note_links` |
+| **ksf_FA_Attachments** | — | Cross-module file attachments | `0_ksf_attachments`, `0_ksf_attachments_audit` |
+| **ksf_FA_Notes** | 1.0.0 | Notes/comments on transactions/contacts | `0_ksf_Notes`, `0_ksf_Notes_link` |
 | **ksf_FA_KnowledgeBase** | 1.0.0 | Articles, categories, FAQ | `fa_kb_*` (3 tables) |
 | **ksf_FA_Forms** | 1.0.0 | Custom form builder | `fa_forms`, `fa_form_submissions` |
 
@@ -202,6 +204,7 @@ HRM (`ksf_FA_HRM`) is an orchestrator. These sub-modules answer hooks:
 | **ksf_FA_Rep_Customer** | — | Rep customer report (`reporting/`) | None |
 | **ksf_FA_Rep_Operations** | — | Rep operations report (`reporting/`) | None |
 | **ksf_fa_downloader** | — | FA module download/fetch tool | `01_fa_download_targets`, `02_fa_downloads` |
+| **ksf_FA_NativeResponder** | 1.0.0 | Hook responders over FA native data functions: FETCH_/SEARCH_ verbs, DTO in, Result envelope out (ADR-005). No own tables; no pages. | None (hooks-only) |
 
 ---
 
@@ -211,53 +214,53 @@ HRM (`ksf_FA_HRM`) is an orchestrator. These sub-modules answer hooks:
 
 | Module | Namespace | Purpose |
 |--------|-----------|---------|
-| `ksf_estate` | `Ksfraser\Estate\` | Estate planning calcs (probate, tax, beneficiary, wealth transfer) |
-| `ksf_insurance` | `Ksfraser\Insurance\` | Insurance needs, valuation, policy comparison |
-| `ksf_retirement` | `Ksfraser\Retirement\` | Retirement planning (withdrawal sequencing, tax optimizer) |
-| `ksf_business_valuation` | `Ksfraser\BusinessValuation\` | Business valuation, buy-sell analysis, succession |
-| `ksf_portfolio` | `Ksfraser\Portfolio\` | Portfolio analytics (TWR, IRR, drawdown, volatility) |
-| `ksf_recommendation` | `Ksfraser\Recommendation\` | Planning recommendations engine |
+| `ksf_estate` | `ksfraser\Estate\` | Estate planning calcs (probate, tax, beneficiary, wealth transfer) |
+| `ksf_insurance` | `ksfraser\Insurance\` | Insurance needs, valuation, policy comparison |
+| `ksf_retirement` | `ksfraser\Retirement\` | Retirement planning (withdrawal sequencing, tax optimizer) |
+| `ksf_business_valuation` | `ksfraser\BusinessValuation\` | Business valuation, buy-sell analysis, succession |
+| `ksf_portfolio` | `ksfraser\Portfolio\` | Portfolio analytics (TWR, IRR, drawdown, volatility) |
+| `ksf_recommendation` | `ksfraser\Recommendation\` | Planning recommendations engine |
 | `ksf_EstatePlanning` | `ksfraser\EstatePlanning\` | Higher-level estate planning (tax calc services) |
 
 ### HR / People
 
 | Module | Namespace | Purpose |
 |--------|-----------|---------|
-| `ksf_HRM` | `Ksfraser\` | HRM entities, services, repositories |
-| `ksf_Leave` | `Ksfraser\` | Leave management library |
-| `ksf_Recruitment` | `Ksfraser\` | Recruitment library |
-| `ksf_Onboarding` | `Ksfraser\` | Onboarding workflows |
-| `ksf_Performance` | `Ksfraser\` | Performance management |
-| `ksf_Training` | `Ksfraser\` | Training management |
-| `ksf_JobDescriptions` | `Ksfraser\JobDescriptions\` | Job descriptions |
-| `ksf_Roster` | `Ksfraser\` | Shift scheduling |
-| `ksf_Timesheets` | `Ksfraser\` | Time tracking |
-| `ksf_OrgChart` | `Ksfraser\` | Org chart hierarchies |
-| `ksf_Teams` | `Ksfraser\` | Teams and ACL |
+| `ksf_HRM` | `ksfraser\` | HRM entities, services, repositories |
+| `ksf_Leave` | `ksfraser\` | Leave management library |
+| `ksf_Recruitment` | `ksfraser\` | Recruitment library |
+| `ksf_Onboarding` | `ksfraser\` | Onboarding workflows |
+| `ksf_Performance` | `ksfraser\` | Performance management |
+| `ksf_Training` | `ksfraser\` | Training management |
+| `ksf_JobDescriptions` | `ksfraser\JobDescriptions\` | Job descriptions |
+| `ksf_Roster` | `ksfraser\` | Shift scheduling |
+| `ksf_Timesheets` | `ksfraser\` | Time tracking |
+| `ksf_OrgChart` | `ksfraser\` | Org chart hierarchies |
+| `ksf_Teams` | `ksfraser\` | Teams and ACL |
 
 ### CRM / Customer
 
 | Module | Namespace | Purpose |
 |--------|-----------|---------|
-| `ksf_CRM` | `Ksfraser\CRM\` | CRM business logic |
-| `ksf_CRM_GEDCOM` | `Ksfraser\CRM\GEDCOM\` | GEDCOM genealogy import/export |
-| `ksf_SupportTickets` | `Ksfraser\` | Support tickets |
-| `ksf_EmailManager` | `Ksfraser\EmailManager\` | Email management (IMAP) |
-| `ksf_Notes` | `Ksfraser\` | Polymorphic notes system |
-| `ksf_Tracking` | `Ksfraser\` | Visitor tracking |
-| `ksf_Marketing` | `Ksfraser\Marketing\` | Marketing automation (AI, social, drip) |
-| `ksf_CampaignBuilder` | `Ksfraser\` | Visual campaign builder |
+| `ksf_CRM` | `ksfraser\CRM\` | CRM business logic |
+| `ksf_CRM_GEDCOM` | `ksfraser\CRM\GEDCOM\` | GEDCOM genealogy import/export |
+| `ksf_SupportTickets` | `ksfraser\` | Support tickets |
+| `ksf_EmailManager` | `ksfraser\EmailManager\` | Email management (IMAP) |
+| `ksf_Notes` | `ksfraser\` | Polymorphic notes system |
+| `ksf_Tracking` | `ksfraser\` | Visitor tracking |
+| `ksf_Marketing` | `ksfraser\Marketing\` | Marketing automation (AI, social, drip) |
+| `ksf_CampaignBuilder` | `ksfraser\` | Visual campaign builder |
 
 ### Commerce / Products
 
 | Module | Namespace | Purpose |
 |--------|-----------|---------|
-| `ksf_Wallet_Core` | `Ksfraser\` | Digital wallet engine |
-| `ksf_DynamicPricing_Core` | `Ksfraser\` | Dynamic pricing engine |
-| `ksf_Shipping_Core` | `Ksfraser\` | Shipping rate calculator |
+| `ksf_Wallet_Core` | `ksfraser\` | Digital wallet engine |
+| `ksf_DynamicPricing_Core` | `ksfraser\` | Dynamic pricing engine |
+| `ksf_Shipping_Core` | `ksfraser\` | Shipping rate calculator |
 | `ksf_PriceBook` | `KsfPriceBook\` | Competitive price intelligence |
 | `ksf_ProductLookup` | `KsfProductLookup\` | Product lookup/staging |
-| `ksf_Inventory` | `Ksfraser\Inventory\` | Inventory (serial/batch, warehouse, vendor) |
+| `ksf_Inventory` | `ksfraser\Inventory\` | Inventory (serial/batch, warehouse, vendor) |
 | `ksf_WarrantyManagement` | — | Warranty tracking/claims |
 | `ksf_SuggestedPurchaseOrder` | `KsfSuggestedPurchaseOrder\` | PO suggestion engine |
 
@@ -265,14 +268,14 @@ HRM (`ksf_FA_HRM`) is an orchestrator. These sub-modules answer hooks:
 
 | Module | Namespace | Purpose |
 |--------|-----------|---------|
-| `ksf_GPG` | `Ksfraser\GPG\` | GPG business logic |
-| `ksf_Nextcloud` | `Ksfraser\Nextcloud\` | Nextcloud connector (OCS, WebDAV, CalDAV) |
-| `ksf_AsteriskPBX` | `Ksfraser\` | Asterisk telephony |
+| `ksf_GPG` | `ksfraser\GPG\` | GPG business logic |
+| `ksf_Nextcloud` | `ksfraser\Nextcloud\` | Nextcloud connector (OCS, WebDAV, CalDAV) |
+| `ksf_AsteriskPBX` | `ksfraser\` | Asterisk telephony |
 | `ksf_LLM` | `KsfCommon\LLM\` | Multi-provider LLM connector |
-| `ksf_DataIO` | `Ksfraser\` | CSV/Excel/JSON/XML import/export |
-| `ksf_bank_import` | `Ksfraser\FaBankImport\` | Bank statement import |
-| `ksf_RBAC` | `Ksfraser\` | RBAC library |
-| `ksf_ESS` | `Ksfraser\` | Employee self-service portal |
+| `ksf_DataIO` | `ksfraser\` | CSV/Excel/JSON/XML import/export |
+| `ksf_bank_import` | `ksfraser\FaBankImport\` | Bank statement import |
+| `ksf_RBAC` | `ksfraser\` | RBAC library |
+| `ksf_ESS` | `ksfraser\` | Employee self-service portal |
 
 ---
 
@@ -334,7 +337,8 @@ HRM (`ksf_FA_HRM`) is an orchestrator. These sub-modules answer hooks:
 
 ### Shared Tables
 - `0_ksf_contact_types` — Contact type registry (ksf_FA_Common; created on demand)
-- `0_fa_job_queue` — Job queue (ksf_FA_Common; created on demand)
+- `0_ksf_common_job_queue` — Job queue (ksf_FA_Common; created on demand)
+- `0_ksf_modules` — Shared registry of installed modules (ksf_FA_Common schema)
 - `0_ksf_notifications` — Notifications (ksf_FA_Common; created on demand)
 - `0_ksf_item_event_watermark` / `0_ksf_item_sync_state` — Item sync watermark + state (ksf_FA_Common; created on demand)
 - `0_staging_*` — Unified staging pipeline (ksf_FA_ImportStagingProcessing)

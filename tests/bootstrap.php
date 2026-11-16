@@ -12,6 +12,8 @@ registerVendoredPsr4(dirname(__DIR__));
 /**
  * @param string $moduleDir Module root
  * @return void
+  *
+ * @BABOK Related: N/A — suite bootstrap; not a requirement
  */
 function registerVendoredPsr4(string $moduleDir): void
 {
@@ -38,4 +40,5 @@ function registerVendoredPsr4(string $moduleDir): void
 }
 
 require_once __DIR__ . "/stubs.php";
+require_once __DIR__ . "/ChildPhpRunner.php";
 
